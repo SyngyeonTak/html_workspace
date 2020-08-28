@@ -1,0 +1,97 @@
+어제 오라클 실습 admin
+1. Table을 저장하기 위해서는 먼저 데이터베이스 파일을 존재시켜야 한다.
+create tablespace 테이블스페이스명
+datafile '저장위치/파일명.dbf' size 용량
+--------------------------------------------------------------------------------------------------------------
+
+2. 위에서 만든 데이터베이스를 사용할 유저 생성(DDL)
+create user 유저명
+identified by  비번
+default tablespace 사용할스페이스명
+quota unlimited on 대상스페이스명
+
+--------------------------------------------------------------------------------------------------------------
+
+3. 권한 부여하기(DCL)
+grant create session, create table to 대상유저;
+
+--------------------------------------------------------------------------------------------------------------
+
+4. MySQL(MariaDB)
+  
+cd C:\MariaDB 10.5\bin					- db가 저장될 디렉토리 설정
+							  (mysql.exe 파일이 존재하는 곳으로 이동한다.)
+
+mysql -h localhost -u root -p				-mysql접근(세미콜론 없음)
+1234							-비밀번호
+
+create database 데이터베이스명(''없음);			-app이라는 db(tablespace같은 것)만들기  ex)android
+create user '유저명'@'localhost' identified by '비번'		-user만들기			    ex)pub
+
+grant all privileges on 대상DB(''없음).* to '유저명'@'localhost';	-모든 권한부여
+flush privileges;						-부여된 권한 flush(새로고침)
+quit;							-exit
+
+현재 접속을 끊고 다시 원하는 유저로 접속			quit후에 mysql -u pub -p(세미콜론 없음)
+							명령어 입력 후 비번 입력
+
+--------------------------------------------------------------------------------------------------------------
+sample data
+어떤 회사의 사원정보와 부서정보를 샘플로 공부한다.(오라클에서 제공)
+
+쿼리 스크립트 가져오는 방법 --> http://blog.naver.com/zino1187
+
+--------------------------------------------------------------------------------------------------------------
+
+1) 사원의 이름, 급여를 출력하시오
+    select ename, sal from emp;
+
+2) 사원의 이름, 급여, 입사일을 출력하되, 급여에 대해 오름차순으로 정렬하여 출력한다.
+    
+    select ename, sal, hiredate from emp order by sal asc; 내임 desc
+
+3)  조건을 추가하여 질의하기
+  	급여가 3000미만인 사원의 이름, 급여를 출력하시오
+	select ename, sal from emp where sal < 3000;
+
+4) 30번 부서에서 근무하는 사원의 이름, 부서번호, 입사일을 출력하시오
+
+	select ename, deptno, hiredate from emp where deptno = 30;
+
+5) 집계함수(무언가 대상으로 집계, 통계를 위해 지원되는 함수를 의미)
+함수란? 호출하면 코드가 동작하여 원하는 결과를 수행하는 코드집합
+	따라서 개발자는 원하는 함수의 이름을 호출만 하면 됨
+	모든 함수는 함수명() 형태로 정의되어 있다.
+
+	합: sum()이용
+		select sum(sal) 급여합 from emp;
+
+	평균 avg(sal)
+		select avg(sal) as 급여평균 from emp;
+	최댓값 max(sal)
+		select max(sal) as 최대급여 from emp;
+	최솟값 min(sal)
+		select min(sal) as 최소급여 from emp;
+	수 count(sal)
+		select count(*) as 사원수 from emp;
+
+--------------------------------------------------------------------------------------------------------------
+
+ oracle database - 유저권한 변경
+alter user user0827
+quota unlimited on study;
+
+--------------------------------------------------------------------------------------------------------------
+■모든 Tag는 block or inline 중 하나의 특성을 갖는다.
+block: 같은 행에 그 어떤 태그도 허용하지 않는다.
+	너비, 높이를 가질 수 있다.
+
+
+inline: 같은 행에 다른 태그와 공존이 가능하다.
+	너비, 높이를 가질 수 없다.
+
+■float 사용이유
+block 형 태그를 공존하게 만들기 위해, 띄우는 속성
+
+
+

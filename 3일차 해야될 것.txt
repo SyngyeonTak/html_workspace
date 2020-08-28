@@ -1,0 +1,7 @@
+db: mariadb연습하기, oracle database 접근자 권한 변환(alter)
+html/css: 각 일자 메뉴꾸미기, 공튀기기
+
+---------------------------------------------------------------------------------------------------
+http://w3schools.com      -> html 공부
+네비게이션에 tutorials -> html/css/javascript -> try it yourself, run(미리보기)
+					   css(advanced -> transformed 등등)
